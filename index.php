@@ -5,6 +5,7 @@ use CustomCurl\Client;
 
 $originProtocol = 'http';
 $originSite     = 'baidu.com';
+$originSiteIP   = '1.1.1.1';
 $thisSite       = 'example.com';
 
 if (!function_exists('getallheaders')) {
@@ -96,7 +97,8 @@ class ReverseProxy
             ->setHeader('Expect', '')
             ->set('timeout', 0)
             ->set('reRequest', 1)
-            ->set('followLocation', 0);
+            ->set('followLocation', 0)
+            ->set('resolve', "$originSite:$originSiteIP");
 
         $headers = getallheaders();
 
